@@ -134,6 +134,46 @@ border:2px solid #ff4d4d !important;
 animation:tremer 0.2s 2;
 }
 
+.tipo-card{
+
+background:#fff5f5;
+border:3px solid transparent;
+padding:18px;
+border-radius:18px;
+margin-top:12px;
+cursor:pointer;
+transition:0.2s;
+
+}
+
+.tipo-card h3{
+
+font-size:22px;
+margin-bottom:6px;
+
+}
+
+.tipo-card p{
+
+margin-bottom:8px;
+color:#555;
+
+}
+
+.tipo-card.ativo{
+
+border:3px solid #ffcc00;
+background:#fff0c2;
+transform:scale(1.02);
+
+}
+
+input:disabled + span{
+
+opacity:0.3;
+
+}
+
 @keyframes tremer{
 
 0%{
