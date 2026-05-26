@@ -1,188 +1,171 @@
-/* RESET */
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-  background:#c40000;
-  font-family:'Poppins',sans-serif;
-  color:#333;
+background:#c40000;
+font-family:'Poppins',sans-serif;
+color:#333;
 }
 
-/* HEADER */
 header{
-  text-align:center;
-  color:white;
-  padding:15px 10px;
-  font-family:'Baloo 2';
+text-align:center;
+padding:20px 10px;
+color:white;
 }
 
-/* CONTAINER */
+.logo{
+width:30%;
+max-width:120px;
+min-width:80px;
+display:block;
+margin:auto;
+}
+
+.subtitulo{
+margin-top:10px;
+font-family:'Baloo 2';
+font-size:22px;
+}
+
 .container{
-  padding:15px;
-  max-width:500px;
-  margin:0 auto;
+max-width:500px;
+margin:auto;
+padding:15px;
 }
 
-/* CARDS */
 .card{
-  background:white;
-  padding:15px;
-  margin-bottom:15px;
-  border-radius:18px;
+background:white;
+padding:18px;
+border-radius:20px;
+margin-bottom:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* TITULOS */
 h2{
-  font-family:'Baloo 2';
-  font-size:20px;
-  margin-bottom:10px;
+font-family:'Baloo 2';
+margin-bottom:12px;
+font-size:22px;
 }
 
-/* INPUTS */
 input,
 select{
-  width:100%;
-  padding:14px;
-  margin-bottom:10px;
-  border-radius:12px;
-  border:none;
-  font-size:16px;
+width:100%;
+padding:15px;
+border:none;
+border-radius:14px;
+margin-bottom:10px;
+font-size:16px;
+outline:none;
 }
 
-/* CHECK */
 .check{
-  display:flex;
-  align-items:center;
-  margin:10px 0;
-  font-size:17px;
-  cursor:pointer;
+display:flex;
+align-items:center;
+margin:12px 0;
+font-size:17px;
+cursor:pointer;
 }
 
 .check input{
-  display:none;
+display:none;
 }
 
 .check span{
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  border:2px solid #c40000;
-  margin-right:10px;
-  transition:0.2s;
+width:22px;
+height:22px;
+border-radius:50%;
+border:2px solid #c40000;
+margin-right:10px;
+transition:0.2s;
 }
 
-/* CHECK ATIVO */
 .check input:checked + span{
-  background:#c40000;
-  transform:scale(1.1);
+background:#c40000;
+transform:scale(1.1);
 }
 
-/* TOTAL */
 .total-box{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  padding:15px;
-  font-size:20px;
-  font-weight:bold;
-  border-top:2px solid #eee;
-  text-align:center;
+position:sticky;
+bottom:0;
+background:white;
+padding:18px;
+font-size:22px;
+font-weight:bold;
+border-radius:18px 18px 0 0;
+text-align:center;
+box-shadow:0 -4px 10px rgba(0,0,0,0.08);
 }
 
-/* BOTÃO */
 button{
-  width:100%;
-  padding:18px;
-  background:#ffcc00;
-  border:none;
-  border-radius:15px;
-  font-size:20px;
-  font-weight:bold;
-  cursor:pointer;
-  transition:0.2s;
+width:100%;
+padding:18px;
+background:#ffcc00;
+border:none;
+border-radius:16px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+margin-top:12px;
 }
 
 button:active{
-  transform:scale(0.98);
+transform:scale(0.98);
 }
 
-/* OBS */
 .obs{
-  font-size:14px;
-  color:#888;
+font-size:14px;
+color:#777;
+margin-top:8px;
 }
 
-/* LOGO */
-.logo{
-  width:30%;
-  max-width:120px;
-  min-width:80px;
-  display:block;
-  margin:0 auto;
-}
-
-/* SUBTITULO */
-.subtitulo{
-  font-family:'Baloo 2';
-  font-size:20px;
-  color:white;
-  margin-top:10px;
-}
-
-/* ERROS */
 .erro{
-  color:#ff4d4d;
-  font-size:12px;
-  display:block;
-  margin-top:5px;
+color:#ffd5d5;
+font-size:13px;
+display:block;
+margin-bottom:8px;
 }
 
 .input-erro{
-  border:2px solid #ff4d4d !important;
-  animation:tremer 0.2s 2;
+border:2px solid #ff4d4d !important;
+animation:tremer 0.2s 2;
 }
 
-/* ANIMAÇÃO */
 @keyframes tremer{
 
-  0%{
-    transform:translateX(0);
-  }
+0%{
+transform:translateX(0);
+}
 
-  25%{
-    transform:translateX(-4px);
-  }
+25%{
+transform:translateX(-4px);
+}
 
-  50%{
-    transform:translateX(4px);
-  }
+50%{
+transform:translateX(4px);
+}
 
-  75%{
-    transform:translateX(-4px);
-  }
+75%{
+transform:translateX(-4px);
+}
 
-  100%{
-    transform:translateX(0);
-  }
+100%{
+transform:translateX(0);
+}
 
 }
 
-/* MOBILE */
-@media (max-width:400px){
+@media(max-width:500px){
 
-  h2{
-    font-size:18px;
-  }
+.check{
+font-size:16px;
+}
 
-  .check{
-    font-size:15px;
-  }
-
-  button{
-    font-size:18px;
-  }
+button{
+font-size:18px;
+}
 
 }
