@@ -1,201 +1,363 @@
-const base = 14.99;
+let tipoAtual = "basica";
 
-// EVENTOS
-document.querySelectorAll("input").forEach(el => {
+const precos = {
 
-  el.addEventListener("change", calcular);
+basica: 11.99,
+media: 15.99,
+premium: 18.99
+
+};
+
+const limites = {
+
+basica: {
+misturas:1,
+extras:3
+},
+
+media: {
+misturas:1,
+extras:999
+},
+
+premium: {
+misturas:2,
+extras:999
+}
+
+};
+
+document.querySelectorAll("input").forEach(el=>{
+
+el.addEventListener("change",calcular);
 
 });
 
-// LIMPAR ERROS SOMENTE NOS CAMPOS
-document.getElementById("nome")
-.addEventListener("input", limparErro);
+document.querySelectorAll(".tipo-card").forEach(card=>{
 
-document.getElementById("endereco")
-.addEventListener("input", limparErro);
+card.addEventListener("click",()=>{
 
-// CALCULAR AO ABRIR
+document.querySelectorAll(".tipo-card")
+.forEach(c=>c.classList.remove("ativo"));
+
+card.classList.add("ativo");
+
+tipoAtual = card.dataset.tipo;
+
+atualizarTela();
+
 calcular();
 
-function vibrar() {
+});
 
-  if (navigator.vibrate) {
+});
 
-    navigator.vibrate(200);
+function vibrar(){
 
-  }
+if(navigator.vibrate){
 
-}
-
-function mostrarErro(input, mensagem, erroId) {
-
-  input.classList.add("input-erro");
-
-  document.getElementById(erroId).innerText =
-  mensagem;
-
-  vibrar();
+navigator.vibrate(200);
 
 }
 
-function limparErro(e) {
+}
 
-  e.target.classList.remove("input-erro");
+function mostrarErro(input,mensagem,erroId){
 
-  if (e.target.id === "nome") {
+input.classList.add("input-erro");
 
-    document.getElementById("erro-nome").innerText =
-    "";
+document.getElementById(erroId)
+.innerText = mensagem;
 
-  }
-
-  if (e.target.id === "endereco") {
-
-    document.getElementById("erro-endereco").innerText =
-    "";
-
-  }
+vibrar();
 
 }
 
-function calcular() {
+function limparErro(e){
 
-  let total = base;
+e.target.classList.remove("input-erro");
 
-  let misturasSelecionadas =
-  document.querySelectorAll(".mistura:checked");
+if(e.target.id==="nome"){
 
-  let refrisSelecionados =
-  document.querySelectorAll(".refri:checked");
-
-  // SOMA MISTURAS EXTRAS
-  if (misturasSelecionadas.length > 2) {
-
-    let extras = misturasSelecionadas.length - 2;
-
-    total += extras * 3.99;
-
-  }
-
-  // SOMA REFRIGERANTES
-  refrisSelecionados.forEach(refri => {
-
-    total += parseFloat(refri.dataset.preco);
-
-  });
-
-  // ATUALIZA TOTAL
-  document.getElementById("total").innerText =
-  "R$ " + total.toFixed(2).replace(".", ",");
+document.getElementById("erro-nome")
+.innerText = "";
 
 }
 
-function finalizar() {
+if(e.target.id==="endereco"){
 
-  let nomeInput =
-  document.getElementById("nome");
+document.getElementById("erro-endereco")
+.innerText = "";
 
-  let enderecoInput =
-  document.getElementById("endereco");
+}
 
-  let nome =
-  nomeInput.value.trim();
+}
 
-  let endereco =
-  enderecoInput.value.trim();
+document.getElementById("nome")
+.addEventListener("input",limparErro);
 
-  let guarnicao =
-  document.getElementById("guarnicao").value;
+document.getElementById("endereco")
+.addEventListener("input",limparErro);
 
-  let pagamento =
-  document.getElementById("pagamento").value;
+function atualizarTela(){
 
-  let misturasSelecionadas =
-  document.querySelectorAll(".mistura:checked");
+const limiteMistura =
+limites[tipoAtual].misturas;
 
-  let extrasSelecionados =
-  document.querySelectorAll(".extra:checked");
+const limiteExtra =
+limites[tipoAtual].extras;
 
-  let refrisSelecionados =
-  document.querySelectorAll(".refri:checked");
+document.getElementById("tituloMistura")
+.innerText =
+`Escolha até ${limiteMistura} mistura(s)`;
 
-  let misturas =
-  [...misturasSelecionadas].map(e => e.value);
+if(limiteExtra >= 999){
 
-  let extras =
-  [...extrasSelecionados].map(e => e.value);
+document.getElementById("tituloExtra")
+.innerText =
+"Escolha todos os adicionais";
 
-  let refris =
-  [...refrisSelecionados].map(e => e.value);
+}else{
 
-  let total =
-  document.getElementById("total").innerText;
+document.getElementById("tituloExtra")
+.innerText =
+`Escolha até ${limiteExtra} adicionais`;
 
-  let valido = true;
+}
 
-  // LIMPAR ERROS
-  document.querySelectorAll(".erro")
-  .forEach(e => e.innerText = "");
+document.querySelectorAll(".mistura")
+.forEach(el=>el.checked=false);
 
-  document.querySelectorAll("input")
-  .forEach(i => i.classList.remove("input-erro"));
+document.querySelectorAll(".extra")
+.forEach(el=>el.checked=false);
 
-  // VALIDAR NOME
-  if (nome === "") {
+}
 
-    mostrarErro(
-      nomeInput,
-      "Informe seu nome",
-      "erro-nome"
-    );
+function calcular(){
 
-    nomeInput.focus();
+let total = precos[tipoAtual];
 
-    valido = false;
+const porcao =
+document.querySelector(".porcao:checked");
 
-  }
+if(porcao){
 
-  // VALIDAR ENDEREÇO
-  if (endereco === "") {
+total += parseFloat(
+porcao.dataset.preco
+);
 
-    mostrarErro(
-      enderecoInput,
-      "Informe seu endereço",
-      "erro-endereco"
-    );
+}
 
-    if (valido) {
+const combos =
+document.querySelectorAll(".combo:checked");
 
-      enderecoInput.focus();
+combos.forEach(combo=>{
 
-    }
+total += parseFloat(
+combo.dataset.preco
+);
 
-    valido = false;
+});
 
-  }
+const refris =
+document.querySelectorAll(".refri:checked");
 
-  // VALIDAR MISTURA
-  if (misturasSelecionadas.length === 0) {
+refris.forEach(refri=>{
 
-    document.getElementById("erro-mistura").innerText =
-    "Escolha pelo menos 1 mistura";
+total += parseFloat(
+refri.dataset.preco
+);
 
-    vibrar();
+});
 
-    valido = false;
+const misturas =
+document.querySelectorAll(".mistura");
 
-  }
+const misturasMarcadas =
+document.querySelectorAll(".mistura:checked");
 
-  if (!valido) return;
+const extras =
+document.querySelectorAll(".extra");
 
-  // MENSAGEM WHATSAPP
-  let mensagem =
+const extrasMarcados =
+document.querySelectorAll(".extra:checked");
+
+const limiteMistura =
+limites[tipoAtual].misturas;
+
+const limiteExtra =
+limites[tipoAtual].extras;
+
+misturas.forEach(el=>{
+
+if(
+misturasMarcadas.length >= limiteMistura
+&& !el.checked
+){
+
+el.disabled = true;
+
+}else{
+
+el.disabled = false;
+
+}
+
+});
+
+extras.forEach(el=>{
+
+if(
+extrasMarcados.length >= limiteExtra
+&& !el.checked
+){
+
+el.disabled = true;
+
+}else{
+
+el.disabled = false;
+
+}
+
+});
+
+document.getElementById("total")
+.innerText =
+"R$ " +
+total.toFixed(2)
+.replace(".",",");
+
+}
+
+function finalizar(){
+
+let nomeInput =
+document.getElementById("nome");
+
+let enderecoInput =
+document.getElementById("endereco");
+
+let nome =
+nomeInput.value.trim();
+
+let endereco =
+enderecoInput.value.trim();
+
+let guarnicao =
+document.getElementById("guarnicao")
+.value;
+
+let pagamento =
+document.getElementById("pagamento")
+.value;
+
+let misturasSelecionadas =
+document.querySelectorAll(".mistura:checked");
+
+let extrasSelecionados =
+document.querySelectorAll(".extra:checked");
+
+let refrisSelecionados =
+document.querySelectorAll(".refri:checked");
+
+let combosSelecionados =
+document.querySelectorAll(".combo:checked");
+
+let misturas =
+[...misturasSelecionadas]
+.map(e=>e.value);
+
+let extras =
+[...extrasSelecionados]
+.map(e=>e.value);
+
+let refris =
+[...refrisSelecionados]
+.map(e=>e.value);
+
+let combos =
+[...combosSelecionados]
+.map(e=>e.value);
+
+let porcaoSelecionada =
+document.querySelector(".porcao:checked");
+
+let porcao =
+porcaoSelecionada
+? porcaoSelecionada.value
+: "Nenhuma";
+
+let total =
+document.getElementById("total")
+.innerText;
+
+let valido = true;
+
+document.querySelectorAll(".erro")
+.forEach(e=>e.innerText="");
+
+document.querySelectorAll("input")
+.forEach(i=>i.classList.remove("input-erro"));
+
+if(nome===""){
+
+mostrarErro(
+nomeInput,
+"Informe seu nome",
+"erro-nome"
+);
+
+nomeInput.focus();
+
+valido = false;
+
+}
+
+if(endereco===""){
+
+mostrarErro(
+enderecoInput,
+"Informe seu endereço",
+"erro-endereco"
+);
+
+if(valido){
+
+enderecoInput.focus();
+
+}
+
+valido = false;
+
+}
+
+if(misturasSelecionadas.length===0){
+
+document.getElementById("erro-mistura")
+.innerText =
+"Escolha pelo menos 1 mistura";
+
+vibrar();
+
+valido = false;
+
+}
+
+if(!valido) return;
+
+let mensagem =
+
 `🍛 *MEU PRATINHO - NOVO PEDIDO*
 
-👤 Nome: ${nome}
+👤 Nome:
+${nome}
 
 📍 Endereço:
 ${endereco}
+
+🍱 Tipo:
+${tipoAtual.toUpperCase()}
 
 🍚 Guarnição:
 ${guarnicao}
@@ -206,6 +368,12 @@ ${misturas.join(", ")}
 ➕ Adicionais:
 ${extras.length ? extras.join(", ") : "Nenhum"}
 
+🍟 Combos:
+${combos.length ? combos.join(", ") : "Nenhum"}
+
+🍟 Porção:
+${porcao}
+
 🥤 Refrigerantes:
 ${refris.length ? refris.join(", ") : "Nenhum"}
 
@@ -215,9 +383,11 @@ ${pagamento}
 💰 TOTAL:
 ${total}`;
 
-  let url =
+let url =
 `https://wa.me/5588996444527?text=${encodeURIComponent(mensagem)}`;
 
-  window.open(url, "_blank");
+window.open(url,"_blank");
 
 }
+
+calcular();
