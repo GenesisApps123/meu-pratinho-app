@@ -1,70 +1,188 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
 body{
-margin:0;
-background:#c40000;
-font-family:Poppins;
+  background:#c40000;
+  font-family:'Poppins',sans-serif;
+  color:#333;
 }
 
+/* HEADER */
+header{
+  text-align:center;
+  color:white;
+  padding:15px 10px;
+  font-family:'Baloo 2';
+}
+
+/* CONTAINER */
 .container{
-max-width:500px;
-margin:auto;
-padding:20px;
+  padding:15px;
+  max-width:500px;
+  margin:0 auto;
 }
 
-h1{
-color:white;
-text-align:center;
-}
-
+/* CARDS */
 .card{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
+  background:white;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:18px;
 }
 
-input{
-width:100%;
-padding:15px;
-border:none;
-border-radius:10px;
-margin-top:10px;
+/* TITULOS */
+h2{
+  font-family:'Baloo 2';
+  font-size:20px;
+  margin-bottom:10px;
 }
 
-label{
-display:block;
-margin-top:15px;
-font-size:18px;
+/* INPUTS */
+input,
+select{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border-radius:12px;
+  border:none;
+  font-size:16px;
 }
 
-.total{
-background:white;
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-font-size:25px;
-font-weight:bold;
-text-align:center;
+/* CHECK */
+.check{
+  display:flex;
+  align-items:center;
+  margin:10px 0;
+  font-size:17px;
+  cursor:pointer;
 }
 
+.check input{
+  display:none;
+}
+
+.check span{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:2px solid #c40000;
+  margin-right:10px;
+  transition:0.2s;
+}
+
+/* CHECK ATIVO */
+.check input:checked + span{
+  background:#c40000;
+  transform:scale(1.1);
+}
+
+/* TOTAL */
+.total-box{
+  position:sticky;
+  bottom:0;
+  background:#fff;
+  padding:15px;
+  font-size:20px;
+  font-weight:bold;
+  border-top:2px solid #eee;
+  text-align:center;
+}
+
+/* BOTÃO */
 button{
-width:100%;
-padding:18px;
-border:none;
-border-radius:15px;
-background:#ffcc00;
-font-size:20px;
-font-weight:bold;
-margin-top:20px;
-}
-.topo{
-text-align:center;
-padding-top:20px;
+  width:100%;
+  padding:18px;
+  background:#ffcc00;
+  border:none;
+  border-radius:15px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.2s;
 }
 
+button:active{
+  transform:scale(0.98);
+}
+
+/* OBS */
+.obs{
+  font-size:14px;
+  color:#888;
+}
+
+/* LOGO */
 .logo{
-width:140px;
-max-width:80%;
-display:block;
-margin:auto;
-margin-bottom:10px;
+  width:30%;
+  max-width:120px;
+  min-width:80px;
+  display:block;
+  margin:0 auto;
+}
+
+/* SUBTITULO */
+.subtitulo{
+  font-family:'Baloo 2';
+  font-size:20px;
+  color:white;
+  margin-top:10px;
+}
+
+/* ERROS */
+.erro{
+  color:#ff4d4d;
+  font-size:12px;
+  display:block;
+  margin-top:5px;
+}
+
+.input-erro{
+  border:2px solid #ff4d4d !important;
+  animation:tremer 0.2s 2;
+}
+
+/* ANIMAÇÃO */
+@keyframes tremer{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  25%{
+    transform:translateX(-4px);
+  }
+
+  50%{
+    transform:translateX(4px);
+  }
+
+  75%{
+    transform:translateX(-4px);
+  }
+
+  100%{
+    transform:translateX(0);
+  }
+
+}
+
+/* MOBILE */
+@media (max-width:400px){
+
+  h2{
+    font-size:18px;
+  }
+
+  .check{
+    font-size:15px;
+  }
+
+  button{
+    font-size:18px;
+  }
+
 }
