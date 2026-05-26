@@ -10,47 +10,73 @@ premium: 18.99
 
 const limites = {
 
-basica: {
+basica:{
 misturas:1,
 extras:3
 },
 
-media: {
+media:{
 misturas:1,
-extras:999
+extras:6
 },
 
-premium: {
+premium:{
 misturas:2,
-extras:999
+extras:6
 }
 
 };
 
-document.querySelectorAll("input").forEach(el=>{
+// CARDS DA QUENTINHA
+document.querySelectorAll(".tipo-card")
+.forEach(card=>{
 
-el.addEventListener("change",calcular);
-
-});
-
-document.querySelectorAll(".tipo-card").forEach(card=>{
-
-card.addEventListener("click",()=>{
+card.addEventListener("click",function(){
 
 document.querySelectorAll(".tipo-card")
 .forEach(c=>c.classList.remove("ativo"));
 
-card.classList.add("ativo");
+this.classList.add("ativo");
 
-tipoAtual = card.dataset.tipo;
+tipoAtual = this.dataset.tipo;
 
-atualizarTela();
+// LIMPAR ESCOLHAS
+document.querySelectorAll(".mistura")
+.forEach(el=>{
+
+el.checked = false;
+el.disabled = false;
+
+});
+
+document.querySelectorAll(".extra")
+.forEach(el=>{
+
+el.checked = false;
+el.disabled = false;
+
+});
 
 calcular();
 
 });
 
 });
+
+// TODOS INPUTS
+document.querySelectorAll("input, select")
+.forEach(el=>{
+
+el.addEventListener("change",calcular);
+
+});
+
+// LIMPAR ERRO
+document.getElementById("nome")
+.addEventListener("input",limparErro);
+
+document.getElementById("endereco")
+.addEventListener("input",limparErro);
 
 function vibrar(){
 
@@ -93,105 +119,73 @@ document.getElementById("erro-endereco")
 
 }
 
-document.getElementById("nome")
-.addEventListener("input",limparErro);
-
-document.getElementById("endereco")
-.addEventListener("input",limparErro);
-
-function atualizarTela(){
-
-const limiteMistura =
-limites[tipoAtual].misturas;
-
-const limiteExtra =
-limites[tipoAtual].extras;
-
-document.getElementById("tituloMistura")
-.innerText =
-`Escolha até ${limiteMistura} mistura(s)`;
-
-if(limiteExtra >= 999){
-
-document.getElementById("tituloExtra")
-.innerText =
-"Escolha todos os adicionais";
-
-}else{
-
-document.getElementById("tituloExtra")
-.innerText =
-`Escolha até ${limiteExtra} adicionais`;
-
-}
-
-document.querySelectorAll(".mistura")
-.forEach(el=>el.checked=false);
-
-document.querySelectorAll(".extra")
-.forEach(el=>el.checked=false);
-
-}
-
 function calcular(){
 
 let total = precos[tipoAtual];
 
-const porcao =
-document.querySelector(".porcao:checked");
+// PORÇÕES
+document.querySelectorAll(".porcao:checked")
+.forEach(el=>{
 
-if(porcao){
-
-total += parseFloat(
-porcao.dataset.preco
-);
-
-}
-
-const combos =
-document.querySelectorAll(".combo:checked");
-
-combos.forEach(combo=>{
-
-total += parseFloat(
-combo.dataset.preco
-);
+total += parseFloat(el.dataset.preco);
 
 });
 
-const refris =
-document.querySelectorAll(".refri:checked");
+// COMBOS
+document.querySelectorAll(".combo:checked")
+.forEach(el=>{
 
-refris.forEach(refri=>{
-
-total += parseFloat(
-refri.dataset.preco
-);
+total += parseFloat(el.dataset.preco);
 
 });
 
-const misturas =
-document.querySelectorAll(".mistura");
+// REFRIS
+document.querySelectorAll(".refri:checked")
+.forEach(el=>{
 
+total += parseFloat(el.dataset.preco);
+
+});
+
+// LIMITES
+const limiteMisturas =
+limites[tipoAtual].misturas;
+
+const limiteExtras =
+limites[tipoAtual].extras;
+
+// CONTAGEM
 const misturasMarcadas =
 document.querySelectorAll(".mistura:checked");
-
-const extras =
-document.querySelectorAll(".extra");
 
 const extrasMarcados =
 document.querySelectorAll(".extra:checked");
 
-const limiteMistura =
-limites[tipoAtual].misturas;
+// TITULOS
+document.getElementById("tituloMistura")
+.innerText =
+`Escolha até ${limiteMisturas} mistura(s)`;
 
-const limiteExtra =
-limites[tipoAtual].extras;
+if(limiteExtras >= 6){
 
-misturas.forEach(el=>{
+document.getElementById("tituloExtra")
+.innerText =
+"Escolha seus adicionais";
+
+}else{
+
+document.getElementById("tituloExtra")
+.innerText =
+`Escolha até ${limiteExtras} adicionais`;
+
+}
+
+// TRAVAR MISTURAS
+document.querySelectorAll(".mistura")
+.forEach(el=>{
 
 if(
-misturasMarcadas.length >= limiteMistura
+misturasMarcadas.length >= limiteMisturas
 && !el.checked
 ){
 
@@ -205,10 +199,12 @@ el.disabled = false;
 
 });
 
-extras.forEach(el=>{
+// TRAVAR ADICIONAIS
+document.querySelectorAll(".extra")
+.forEach(el=>{
 
 if(
-extrasMarcados.length >= limiteExtra
+extrasMarcados.length >= limiteExtras
 && !el.checked
 ){
 
@@ -222,6 +218,7 @@ el.disabled = false;
 
 });
 
+// TOTAL
 document.getElementById("total")
 .innerText =
 "R$ " +
@@ -252,32 +249,20 @@ let pagamento =
 document.getElementById("pagamento")
 .value;
 
-let misturasSelecionadas =
-document.querySelectorAll(".mistura:checked");
-
-let extrasSelecionados =
-document.querySelectorAll(".extra:checked");
-
-let refrisSelecionados =
-document.querySelectorAll(".refri:checked");
-
-let combosSelecionados =
-document.querySelectorAll(".combo:checked");
-
 let misturas =
-[...misturasSelecionadas]
+[...document.querySelectorAll(".mistura:checked")]
 .map(e=>e.value);
 
 let extras =
-[...extrasSelecionados]
-.map(e=>e.value);
-
-let refris =
-[...refrisSelecionados]
+[...document.querySelectorAll(".extra:checked")]
 .map(e=>e.value);
 
 let combos =
-[...combosSelecionados]
+[...document.querySelectorAll(".combo:checked")]
+.map(e=>e.value);
+
+let refris =
+[...document.querySelectorAll(".refri:checked")]
 .map(e=>e.value);
 
 let porcaoSelecionada =
@@ -294,12 +279,14 @@ document.getElementById("total")
 
 let valido = true;
 
+// LIMPAR
 document.querySelectorAll(".erro")
 .forEach(e=>e.innerText="");
 
 document.querySelectorAll("input")
 .forEach(i=>i.classList.remove("input-erro"));
 
+// NOME
 if(nome===""){
 
 mostrarErro(
@@ -314,6 +301,7 @@ valido = false;
 
 }
 
+// ENDEREÇO
 if(endereco===""){
 
 mostrarErro(
@@ -332,7 +320,8 @@ valido = false;
 
 }
 
-if(misturasSelecionadas.length===0){
+// MISTURA
+if(misturas.length===0){
 
 document.getElementById("erro-mistura")
 .innerText =
@@ -346,6 +335,7 @@ valido = false;
 
 if(!valido) return;
 
+// MENSAGEM
 let mensagem =
 
 `🍛 *MEU PRATINHO - NOVO PEDIDO*
