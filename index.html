@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meu Pratinho</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css?v=1">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🍛 Meu Pratinho</h1>
+
+<input type="text" id="nome" placeholder="Seu nome">
+
+<input type="text" id="endereco" placeholder="Seu endereço">
+
+<div class="card">
+
+<h2>Escolha até 2 misturas</h2>
+
+<label>
+<input type="checkbox" class="mistura" value="Costelinha">
+Costelinha
+</label>
+
+<label>
+<input type="checkbox" class="mistura" value="Linguiça">
+Linguiça
+</label>
+
+<label>
+<input type="checkbox" class="mistura" value="Galinha caipira">
+Galinha caipira
+</label>
+
+<label>
+<input type="checkbox" class="mistura" value="Ovo frito">
+Ovo frito
+</label>
+
+</div>
+
+<div class="total">
+Total:
+<span id="total">R$ 14,99</span>
+</div>
+
+<button onclick="finalizar()">
+Finalizar Pedido
+</button>
+
+</div>
+
+<script src="script.js?v=1"></script>
+
+</body>
+</html>
