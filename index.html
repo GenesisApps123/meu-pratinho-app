@@ -2,64 +2,207 @@
 <html lang="pt-br">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meu Pratinho</title>
+<title>MEU PRATINHO - ALMOÇO</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css?v=1">
-
 </head>
 
 <body>
 
-<div class="topo">
+<header>
 
 <img src="logo.png" class="logo">
 
-<h1>🍛 Meu Pratinho</h1>
+<p class="subtitulo">
+MONTE SEU ALMOÇO
+</p>
 
-</div>
+</header>
 
 <div class="container">
-</div>
 
 <input type="text" id="nome" placeholder="Seu nome">
+<small class="erro" id="erro-nome"></small>
 
 <input type="text" id="endereco" placeholder="Seu endereço">
+<small class="erro" id="erro-endereco"></small>
 
+<!-- GUARNIÇÃO -->
 <div class="card">
 
-<h2>Escolha até 2 misturas</h2>
+<h2>Guarnição</h2>
 
-<label>
-<input type="checkbox" class="mistura" value="Costelinha">
-Costelinha
+<select id="guarnicao">
+
+<option>Arroz branco</option>
+<option>Baião de dois normal</option>
+<option>Baião de dois cremoso</option>
+
+</select>
+
+</div>
+
+<!-- MISTURAS -->
+<div class="card">
+
+<h2>Escolha até 2 misturas grátis</h2>
+
+<small class="erro" id="erro-mistura"></small>
+
+<label class="check">
+<input type="checkbox" class="mistura" value="Costelinha suína Barbecue">
+<span></span>
+Costelinha suína Barbecue
 </label>
 
-<label>
-<input type="checkbox" class="mistura" value="Linguiça">
-Linguiça
+<label class="check">
+<input type="checkbox" class="mistura" value="Linguiça na brasa">
+<span></span>
+Linguiça na brasa
 </label>
 
-<label>
+<label class="check">
 <input type="checkbox" class="mistura" value="Galinha caipira">
+<span></span>
 Galinha caipira
 </label>
 
-<label>
+<label class="check">
 <input type="checkbox" class="mistura" value="Ovo frito">
+<span></span>
 Ovo frito
+</label>
+
+<label class="check">
+<input type="checkbox" class="mistura" value="Queijo frito">
+<span></span>
+Queijo frito
+</label>
+
+<label class="check">
+<input type="checkbox" class="mistura" value="Calabresa acebolada">
+<span></span>
+Calabresa acebolada
+</label>
+
+<p class="obs">
++ R$3,99 por mistura extra
+</p>
+
+</div>
+
+<!-- ADICIONAIS -->
+<div class="card">
+
+<h2>Adicionais grátis</h2>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Farofa">
+<span></span>
+Farofa
+</label>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Salada">
+<span></span>
+Salada
+</label>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Macarrão">
+<span></span>
+Macarrão
+</label>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Cuscuz">
+<span></span>
+Cuscuz
+</label>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Chips de macaxeira">
+<span></span>
+Chips de macaxeira
 </label>
 
 </div>
 
-<div class="total">
+<!-- REFRIGERANTES -->
+<div class="card">
+
+<h2>Refrigerantes</h2>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="3.99" value="Suco de fruta">
+<span></span>
+Suco de fruta R$3,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="4.99" value="Coca lata">
+<span></span>
+Coca lata R$4,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="4.99" value="Cajuína lata">
+<span></span>
+Cajuína lata R$4,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="9.99" value="Coca 1L">
+<span></span>
+Coca 1L R$9,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="9.99" value="Cajuína 1L">
+<span></span>
+Cajuína 1L R$9,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="14.99" value="Coca 2L">
+<span></span>
+Coca 2L R$14,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="refri" data-preco="14.99" value="Cajuína 2L">
+<span></span>
+Cajuína 2L R$14,99
+</label>
+
+</div>
+
+<!-- PAGAMENTO -->
+<div class="card">
+
+<h2>Pagamento</h2>
+
+<select id="pagamento">
+
+<option>Dinheiro</option>
+<option>Pix</option>
+<option>Cartão</option>
+
+</select>
+
+</div>
+
+<!-- TOTAL -->
+<div class="total-box">
+
 Total:
 <span id="total">R$ 14,99</span>
+
 </div>
 
 <button onclick="finalizar()">
