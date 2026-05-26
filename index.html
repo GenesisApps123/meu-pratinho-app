@@ -10,7 +10,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 
 </head>
 
@@ -27,6 +27,80 @@ MONTE SEU ALMOÇO
 </header>
 
 <div class="container">
+
+<!-- TIPOS DE QUENTINHA -->
+<div class="card">
+
+<h2>Escolha sua quentinha</h2>
+
+<div class="tipo-card ativo" data-tipo="basica">
+
+<h3>🍛 Quentinha Básica</h3>
+
+<p>
+1 mistura + até 3 adicionais
+</p>
+
+<strong>R$ 11,99</strong>
+
+</div>
+
+<div class="tipo-card" data-tipo="media">
+
+<h3>🍛 Quentinha Completa</h3>
+
+<p>
+1 mistura + todos os adicionais
+</p>
+
+<strong>R$ 15,99</strong>
+
+</div>
+
+<div class="tipo-card" data-tipo="premium">
+
+<h3>🍛 Quentinha Premium</h3>
+
+<p>
+2 misturas + todos os adicionais
+</p>
+
+<strong>R$ 18,99</strong>
+
+</div>
+
+</div>
+
+<!-- PORÇÕES -->
+<div class="card">
+
+<h2>🍟 Porções</h2>
+
+<label class="check">
+<input type="radio" name="porcao" class="porcao"
+data-preco="12.99"
+value="Lasanha completa">
+<span></span>
+Lasanha completa R$12,99
+</label>
+
+<label class="check">
+<input type="radio" name="porcao" class="porcao"
+data-preco="14.99"
+value="Batata com calabresa e cheddar">
+<span></span>
+Batata com calabresa e cheddar R$14,99
+</label>
+
+<label class="check">
+<input type="radio" name="porcao" class="porcao"
+data-preco="14.99"
+value="Batata com carne de sol e cheddar">
+<span></span>
+Batata com carne de sol e cheddar R$14,99
+</label>
+
+</div>
 
 <input type="text" id="nome" placeholder="Seu nome">
 <small class="erro" id="erro-nome"></small>
@@ -52,7 +126,9 @@ MONTE SEU ALMOÇO
 <!-- MISTURAS -->
 <div class="card">
 
-<h2>Escolha até 2 misturas grátis</h2>
+<h2 id="tituloMistura">
+Escolha até 1 mistura
+</h2>
 
 <small class="erro" id="erro-mistura"></small>
 
@@ -92,16 +168,14 @@ Queijo frito
 Calabresa acebolada
 </label>
 
-<p class="obs">
-+ R$3,99 por mistura extra
-</p>
-
 </div>
 
 <!-- ADICIONAIS -->
 <div class="card">
 
-<h2>Adicionais grátis</h2>
+<h2 id="tituloExtra">
+Escolha até 3 adicionais
+</h2>
 
 <label class="check">
 <input type="checkbox" class="extra" value="Farofa">
@@ -128,9 +202,38 @@ Cuscuz
 </label>
 
 <label class="check">
-<input type="checkbox" class="extra" value="Chips de macaxeira">
+<input type="checkbox" class="extra" value="Feijão">
 <span></span>
-Chips de macaxeira
+Feijão
+</label>
+
+<label class="check">
+<input type="checkbox" class="extra" value="Vinagrete">
+<span></span>
+Vinagrete
+</label>
+
+</div>
+
+<!-- COMBOS -->
+<div class="card">
+
+<h2>🍟 Combos</h2>
+
+<label class="check">
+<input type="checkbox" class="combo"
+data-preco="4.99"
+value="Batata frita">
+<span></span>
+Batata frita + R$4,99
+</label>
+
+<label class="check">
+<input type="checkbox" class="combo"
+data-preco="4.99"
+value="Chips de macaxeira">
+<span></span>
+Chips de macaxeira + R$4,99
 </label>
 
 </div>
@@ -202,7 +305,7 @@ Cajuína 2L R$14,99
 <div class="total-box">
 
 Total:
-<span id="total">R$ 14,99</span>
+<span id="total">R$ 11,99</span>
 
 </div>
 
@@ -212,7 +315,7 @@ Finalizar Pedido
 
 </div>
 
-<script src="script.js?v=2"></script>
+<script src="script.js?v=3"></script>
 
 </body>
 </html>
