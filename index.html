@@ -12,6 +12,47 @@
 
 <link rel="stylesheet" href="style.css?v=3">
 
+<style>
+
+.menu-porcao{
+
+margin-top:15px;
+border:2px solid #ff9800;
+border-radius:15px;
+overflow:hidden;
+
+}
+
+.topo-porcao{
+
+background:#ff9800;
+color:white;
+padding:15px;
+font-weight:bold;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+font-size:18px;
+
+}
+
+.lista-porcao{
+
+display:none;
+padding:15px;
+background:#fff8f0;
+
+}
+
+.lista-porcao.ativo{
+
+display:block;
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -28,8 +69,7 @@ MONTE SEU ALMOÇO
 
 <div class="container">
 
-</div>
-
+<!-- NOME E ENDEREÇO AGORA NO TOPO -->
 <input type="text" id="nome" placeholder="Seu nome">
 <small class="erro" id="erro-nome"></small>
 
@@ -67,7 +107,7 @@ MONTE SEU ALMOÇO
 
 <div class="tipo-card" data-tipo="premium">
 
-<h3>🍛 Quentinha G(900ml)</h3>
+<h3>🍛 Quentinha G (900ml)</h3>
 
 <p>
 2 misturas + todos os adicionais
@@ -79,17 +119,25 @@ MONTE SEU ALMOÇO
 
 </div>
 
-<!-- PORÇÕES -->
-<div class="card">
+<!-- MENU REMOVÍVEL DE PORÇÕES -->
+<div class="menu-porcao">
 
-<h2>🍟 Porções</h2>
+<div class="topo-porcao" onclick="togglePorcoes()">
+
+<span>🍟 Porções</span>
+
+<span id="iconePorcao">▼</span>
+
+</div>
+
+<div class="lista-porcao" id="listaPorcao">
 
 <label class="check">
 <input type="radio" name="porcao" class="porcao"
 data-preco="12.99"
 value="Lasanha completa">
 <span></span>
-Lasanha a bolonhesa (Quentinha 400ml cheia) R$12,99
+Lasanha à bolonhesa (Quentinha 400ml cheia) R$12,99
 </label>
 
 <label class="check">
@@ -115,6 +163,10 @@ value="Não quero">
 <span></span>
 Não quero
 </label>
+
+</div>
+
+</div>
 
 <!-- GUARNIÇÃO -->
 <div class="card">
@@ -324,6 +376,46 @@ Finalizar Pedido
 </div>
 
 <script src="script.js?v=3"></script>
+
+<script>
+
+// MENU RETRÁTIL DAS PORÇÕES
+function togglePorcoes(){
+
+const lista = document.getElementById("listaPorcao");
+const icone = document.getElementById("iconePorcao");
+
+lista.classList.toggle("ativo");
+
+icone.innerText = lista.classList.contains("ativo")
+? "▲"
+: "▼";
+
+}
+
+// PERMITE DESMARCAR RADIO
+let ultimoRadio = null;
+
+document.querySelectorAll(".porcao").forEach(radio=>{
+
+radio.addEventListener("click", function(){
+
+if(ultimoRadio === this){
+
+this.checked = false;
+ultimoRadio = null;
+
+}else{
+
+ultimoRadio = this;
+
+}
+
+});
+
+});
+
+</script>
 
 </body>
 </html>
