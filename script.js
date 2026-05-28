@@ -4,7 +4,7 @@ const precos = {
 
 basica: 11.99,
 media: 15.99,
-premium: 18.99
+premium: 19.99
 
 };
 
