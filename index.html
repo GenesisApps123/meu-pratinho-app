@@ -71,12 +71,15 @@ MONTE SEU ALMOÇO
 
 <div class="container">
 
+<!-- NOME E ENDEREÇO AGORA NO TOPO --> 
 <input type="text" id="nome" placeholder="Seu nome">
-<small class="erro" id="erro-nome"></small>
+<small class="erro" id="erro-nome"></small> 
+<input type="text" id="endereco" placeholder="Seu endereço">
+<small class="erro" id="erro-endereco">
+</small>
 
 <button
 type="button"
-id="btnLocalizacao"
 onclick="usarLocalizacao()"
 style="
 width:100%;
@@ -91,22 +94,6 @@ cursor:pointer;
 ">
 📍 Usar Minha Localização Atual
 </button>
-
-<div
-id="statusLocalizacao"
-style="
-display:none;
-margin-top:10px;
-padding:10px;
-background:#e8f5e9;
-border-radius:10px;
-font-weight:bold;
-color:#2e7d32;
-">
-✅ Localização capturada
-</div>
-
-<small class="erro" id="erro-endereco"></small>
 
 <small class="erro" id="erro-endereco"></small>
 
