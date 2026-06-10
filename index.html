@@ -71,19 +71,12 @@ MONTE SEU ALMOÇO
 
 <div class="container">
 
-<!-- NOME E ENDEREÇO AGORA NO TOPO -->
-<input type="text" id="nome" placeholder="Seu nome">
-<small class="erro" id="erro-nome"></small>
-
-<input type="text" id="endereco" placeholder="Seu endereço">
-<small class="erro" id="erro-endereco"></small>
-
 <button
 type="button"
+id="btnLocalizacao"
 onclick="usarLocalizacao()"
 style="
 width:100%;
-margin-top:10px;
 padding:12px;
 border:none;
 border-radius:10px;
@@ -92,8 +85,23 @@ color:#fff;
 font-weight:bold;
 cursor:pointer;
 ">
-📍 Usar Minha Localização Atual
+📍 Capturar Minha Localização
 </button>
+
+<div
+id="localizacaoCapturada"
+style="
+margin-top:10px;
+padding:10px;
+background:#fff8f0;
+border-radius:10px;
+display:none;
+font-size:14px;
+">
+Localização capturada com sucesso.
+</div>
+
+<small class="erro" id="erro-endereco"></small>
 
 <!-- TIPOS DE QUENTINHA -->
 <div class="card">
