@@ -2,6 +2,7 @@ let tipoAtual = "basica";
 
 let latitudeAtual = "";
 let longitudeAtual = "";
+let enderecoCapturado = "";
 
 const precos = {
 
