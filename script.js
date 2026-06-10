@@ -1,5 +1,8 @@
 let tipoAtual = "basica";
 
+let latitudeAtual = "";
+let longitudeAtual = "";
+
 const precos = {
 
 basica: 11.99,
@@ -116,6 +119,72 @@ document.getElementById("erro-endereco")
 .innerText = "";
 
 }
+
+}
+
+function usarLocalizacao(){
+
+if(!navigator.geolocation){
+
+alert("Seu navegador não suporta geolocalização.");
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(posicao){
+
+latitudeAtual =
+posicao.coords.latitude;
+
+longitudeAtual =
+posicao.coords.longitude;
+
+const geocoder =
+new google.maps.Geocoder();
+
+geocoder.geocode(
+{
+location:{
+lat: latitudeAtual,
+lng: longitudeAtual
+}
+},
+function(results,status){
+
+if(
+status==="OK"
+&& results[0]
+){
+
+document.getElementById("endereco")
+.value =
+results[0].formatted_address;
+
+}else{
+
+document.getElementById("endereco")
+.value =
+latitudeAtual + "," + longitudeAtual;
+
+}
+
+}
+);
+
+},
+
+function(){
+
+alert(
+"Não foi possível obter sua localização."
+);
+
+}
+
+);
 
 }
 
@@ -335,6 +404,15 @@ valido = false;
 
 if(!valido) return;
 
+let localizacaoGps =
+latitudeAtual && longitudeAtual
+? `
+
+📌 Localização GPS:
+https://maps.google.com/?q=${latitudeAtual},${longitudeAtual}
+`
+: "";
+
 // MENSAGEM
 let mensagem =
 
@@ -344,7 +422,7 @@ let mensagem =
 ${nome}
 
 📍 Endereço:
-${endereco}
+${endereco}${localizacaoGps}
 
 🍱 Tipo:
 ${tipoAtual.toUpperCase()}
