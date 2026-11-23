@@ -6,8 +6,8 @@ let longitudeAtual = "";
 const precos = {
 
 basica: 12.99,
-media: 16.99,
-premium: 20.99
+media: 14.99,
+premium: 19.99
 
 };
 
